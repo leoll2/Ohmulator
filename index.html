@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="author" content="Leonardo Lai">
+<meta name="description" content="An easy-to-use web application to solve electric circuits.">
+<title>OHMULATOR</title>
+<link rel="icon" href="img/favicon.png" type="image/png">
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<script type="text/javascript" src="js/globals.js"></script>
+<script type="text/javascript" src="js/complex.js"></script>
+<script type="text/javascript" src="js/result.js"></script>
+<script type="text/javascript" src="js/modal.js"></script>
+<script type="text/javascript" src="js/help.js"></script>
+<script type="text/javascript" src="js/objects.js"></script>
+<script type="text/javascript" src="js/graphics.js"></script>
+<script type="text/javascript" src="js/values.js"></script>
+<script type="text/javascript" src="js/gauss.js"></script>
+<script type="text/javascript" src="js/validity.js"></script>
+<script type="text/javascript" src="js/tools.js"></script>
+<script type="text/javascript" src="js/nodal_analysis.js"></script>
+<script type="text/javascript" src="js/delete.js"></script>
+<script type="text/javascript" src="js/download.js"></script>
+<script type="text/javascript" src="js/upload.js"></script>
+<script type="text/javascript" src="js/main.js"></script>
+</head>
+    
+<body onload="begin()" onresize="resize()">
+<!-- Title and short description -->
+<header>
+    <h2><span id="ohm">OHM</span>ULATOR</h2>
+    <h5>A handy tool for AC/DC simulation</h5>
+</header>
+<!-- Container for the drawing board -->
+<div id="wrapper">
+    <!-- Rectangle where the user can draw the circuit -->
+    <svg id="drawingboard">
+    </svg>
+</div>
+<!-- Toolbar -->
+<div id="toolbar">
+    <button type="button" class="roundbutton" id="resetbutton" title="Reset" onclick="reset()"></button>
+    <button type="button" class="roundbutton" id="runbutton" title="Run" onclick="run()"></button>
+    <button type="button" class="roundbutton" id="downloadbutton" title="Download" onclick="downloadClick()"></button>
+    <button type="button" class="roundbutton" id="uploadbutton" title="Upload" onclick="uploadClick()"></button>
+    <button type="button" class="roundbutton" id="helpbutton" title="Help" onclick="help()"></button>
+    <button type="button" class="rectbutton" id="removebutton" title="Remove"></button>
+    <button type="button" class="rectbutton" id="nodebutton" title="Node"></button>
+    <button type="button" class="rectbutton" id="wirebutton" title="Wire"></button>
+    <button type="button" class="rectbutton" id="resistorbutton" title="Resistor"></button>
+    <button type="button" class="rectbutton" id="inductorbutton" title="Inductor"></button>
+    <button type="button" class="rectbutton" id="capacitorbutton" title="Capacitor"></button>
+    <button type="button" class="rectbutton" id="voltagebutton" title="Voltage generator"></button>
+    <button type="button" class="rectbutton" id="currentbutton" title="Current generator"></button>
+    <button type="button" class="rectbutton" id="currentalphabutton" title="Current generator controlled by current"></button>
+    <button type="button" class="rectbutton" id="currentbetabutton" title="Current generator controlled by voltage"></button>
+    <button type="button" class="rectbutton" id="voltagealphabutton" title="Voltage generator controlled by voltage"></button>
+    <button type="button" class="rectbutton" id="voltagebetabutton" title="Voltage generator controlled by current"></button>
+    <input  type="text" placeholder="Insert value" id="valuebutton" value="10" onchange="valueCheck()">
+    <input  type="text" id="unitbutton" value="Ω" title="Unit" readonly>
+</div>
+<!-- Modal windows -->
+<div id="modalcontainer">
+    <!-- Modal window to download a circuit -->
+    <div id="downloadbox" class="promptmodal">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <p class="prompttitle">DOWNLOAD</p>
+        <p class="promptdescription">Select a circuit</p>
+        <div class="loadoptions">
+            <input type="radio" name="loadmode" value="fromName"> Using name:
+            <input type="text" name="identifier" placeholder="Insert name">
+            <br>
+            <input type="radio" name="loadmode" value="fromSuggested" checked> Using default:
+            <select name="defaultoption">
+                <option value="example1">Simple DC</option>
+                <option value="example2">Simple AC</option>
+                <option value="example3">Voltage divider</option>
+                <option value="example4">Current divider</option>
+            </select>
+            <br>
+        </div>
+        <button type="button" name="load" class="loadbutton" onclick="downloadHandler()">LOAD</button>
+    </div>
+    <!-- Modal window to upload a circuit -->
+    <div id="uploadbox" class="promptmodal">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <p class="prompttitle">UPLOAD</p>
+        <p class="promptdescription">Choose a name for your circuit</p>
+        <input type="text" id="uploadid" placeholder="Insert name" oninput="duplicateCircuitName()">
+        <div id="duplicatesignal" title="Already used"></div>
+        <button type="button" name="load" class="loadbutton" id="uploadbutton2" onclick="uploadHandler()">LOAD</button>
+    </div>
+    <!-- Modal window to get info about this application -->
+    <div id="helpbox">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <p class="prompttitle">HELP</p>
+        <div id="helpsidebar">
+        <ul>
+            <li onclick="showHelpDescription(0)">General</li>
+            <li onclick="showHelpDescription(1)">Getting started</li>
+            <li onclick="showHelpDescription(2)">Features</li>
+            <li onclick="showHelpDescription(3)">Technical details</li>
+            <li onclick="showHelpDescription(4)">Author</li>
+            <li onclick="showHelpDescription(5)">Report a bug</li>
+        </ul>
+        </div>
+        <div id="helptextbox">
+        </div>
+    </div>
+</div>
+</body>
+</html>

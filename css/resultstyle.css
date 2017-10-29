@@ -1,0 +1,50 @@
+/*============================================*/
+/*====      CSS OF THE RESULT WINDOW      ====*/
+/*============================================*/
+
+
+body {
+    background-color: #111111;
+    color: #dddddd;
+}
+
+table {
+    width: 100%;
+    border: 2px solid grey;
+}
+
+th, td {
+    border: 1px solid grey;
+}
+
+.divtable {
+    min-width: 350px;
+    max-height: 250px;
+    overflow-y: auto;
+}
+
+th {
+    color: #00f7ff;
+    font-size: 18px;
+}
+
+td {
+    padding-left: 5px;
+}
+
+tr {
+    font-family: Geneva,Tahoma,Verdana,sans-serif;
+    font-size: 16px;
+}
+/*Dynamic effect on mouse over the table rows*/
+tr:hover {
+    color: #00f7ff;
+    background-color: #333333;
+}
+/*Little paragraph beneath the tables*/
+.resultnote {
+    margin-bottom: 12px;
+    font-style: italic;
+    font-family: Arial;
+    font-size: 12px;
+}

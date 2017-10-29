@@ -1,0 +1,11 @@
+In Mozilla, resizing may cause an inconsistent position of new points when drawing. This is due to getBoundingClientRect(), which is bugged for SVG elements in Mozilla 32 (our test browser). It was then fixed in Mozilla 33.
+The bug was known and reported here:
+
+https://bugzilla.mozilla.org/show_bug.cgi?id=530985
+
+===================================================
+
+Sometimes Mozilla seems to be bad at rendering SVG filters, so the images appear with low resolution and quality. 
+A soft-fix to this issue can be zooming-in, which usually improves the quality of rendered images.
+
+===================================================

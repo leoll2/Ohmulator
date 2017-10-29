@@ -1,0 +1,371 @@
+/*============================================*/
+/*====       CSS OF THE MAIN WINDOW       ====*/
+/*============================================*/
+
+*{
+    box-sizing: border-box;   /*width and height not affected by borders and paddings*/
+    margin: 0;                /*no margins by default*/
+    padding: 0;               /*no paddings by default*/
+}
+
+html, body{
+    min-width: 600px;       /*minimum drawingboard width*/
+}
+/*Top header*/
+header{
+    position: fixed;        /*fixed on the top of window*/
+    top: 0;
+    height: 70px;
+    width: 100%;
+    background-color: #111111;
+    border-bottom: ridge;
+    border-color: #00F7FF;
+}
+
+/*Title*/
+h2{
+    margin: auto;
+    text-align: center;
+    font-family: Rockwell, "Courier Bold", serif;
+    color: #f5f5f5;
+    font-size: 2.2em;
+}
+/*Subtitle*/
+h5{
+    margin: auto;
+    text-align: center;
+    font-family: Calibri, sans-serif;
+    color: #f5f5f5;
+    font-size: 0.8em;
+}
+/*Some letters in the title*/
+#ohm{
+    color: #00F7FF;
+}
+/*Wrapper for the SVG stuff*/
+#wrapper{
+    margin-top: 70px;               /*must match header height*/
+    margin-bottom: 80px;            /*must match toolbar height*/
+    min-height: calc(100vh - 150px);  /*full window minus header+toolbar*/
+    background-image: url(../img/background.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+}
+/*Rectangle where the user can draw*/
+#drawingboard{
+    background-color: floralwhite;
+    height: 400px;
+    min-width: 900px;
+    margin: auto;
+    border-style: groove;
+    border-color: #00F7FF;
+    cursor: crosshair;
+}
+/*Toolbar in the bottom*/
+#toolbar{
+    position: fixed;        /*fixed in the bottom of window*/
+    bottom: 0;
+    height: 80px;
+    width: 100%;
+    background-color: #111111;
+    border-top: ridge #00F7FF;
+    display: flex;
+    overflow: auto;
+}
+/*Hides the ugly outlines for accessibility.*/
+button:focus, input:focus {outline:0;}
+/*Rectangular button*/
+.rectbutton{
+    margin-left: 2px;
+    margin-right: 2px;
+    margin-top: auto;
+    margin-bottom: auto;
+    border-style: outset;
+    border-width: 2.5px;
+    border-color: lightgray;
+    border-radius: 8px;
+    background-color: #77fcff;
+    min-width: 70px;
+    height: 35px;
+    background-position: center;
+    background-size: 70px 35px;
+    background-repeat: no-repeat;
+    cursor: pointer;
+}
+/*Round button*/
+.roundbutton{
+    margin-left: 2px;
+    margin-right: 2px;
+    margin-top: auto;
+    margin-bottom: auto;
+    min-width: 50px;
+    height: 50px;
+    border-radius: 25px;
+    background-color: #77fcff;
+    background-position: center;
+    background-size: 50px 50px;
+    background-repeat: no-repeat;
+    cursor: pointer;
+}
+/*Dynamic effect on mouse over on buttons*/
+.rectbutton:hover, .roundbutton:hover{
+    border-style: inset;
+}
+
+#resetbutton{
+    margin-left: auto;      /*first button in the toolbar, allows centering of buttons*/
+    background-image: url(../img/reset.png);
+}
+
+#runbutton{
+    background-image: url(../img/play.png);
+}
+
+#downloadbutton{
+    background-image: url(../img/download.png);
+}
+
+#uploadbutton{
+    background-image: url(../img/upload.png);
+}
+
+#helpbutton{
+    background-image: url(../img/helplogo.png);
+}
+
+#wirebutton{
+    background-image: url(../img/wirelogo.png);
+}
+
+#nodebutton{
+    background-image: url(../img/nodelogo.png);
+}
+
+#removebutton{
+    background-image: url(../img/removelogo.png);
+}
+
+#resistorbutton{
+    background-image: url(../img/resistorlogo.png);
+}
+
+#inductorbutton{
+    background-image: url(../img/inductorlogo.png);
+}
+
+#capacitorbutton{
+    background-image: url(../img/capacitorlogo.png);
+}
+
+#voltagebutton{
+    background-image: url(../img/voltagelogo.png);
+}
+
+#currentbutton{
+    background-image: url(../img/currentlogo.png);
+}
+
+#currentalphabutton{
+    background-image: url(../img/controlled_current_alpha_logo.png);
+}
+
+#currentbetabutton{
+    background-image: url(../img/controlled_current_beta_logo.png);
+}
+
+#voltagealphabutton{
+    background-image: url(../img/controlled_voltage_alpha_logo.png);
+}
+
+#voltagebetabutton{
+    background-image: url(../img/controlled_voltage_beta_logo.png);
+}
+/*Input field where the user writes the value of the component*/
+#valuebutton{
+    margin-left: 2px;
+    margin-bottom: auto;
+    margin-top: auto;
+    border-right: 0;        /*looks joint to the unit button*/
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    padding-right: 4px;
+    height: 50px;
+    min-width: 110px;
+    text-align: right;
+    font-size: 20px;
+    color: #111111;
+}
+/*Readonly field which displays the unity of measure of the selected component*/
+#unitbutton{
+    margin-right: auto;     /*last element in the toolbar, allows centering of buttons*/
+    margin-bottom: auto;
+    margin-top: auto;
+    border-left: 0;         /*looks join to the value button*/
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    height: 50px;
+    width: 25px;
+    text-align: center;
+    font-size: 20px;
+    color: #111111;
+}
+
+/*These things are NOT standard yet, but supported by most browsers for a long time. They prevent the SVG text from being unintentionally selected and highlighted, which can be pretty annoying sometimes. Anyway, feel free to ignore them, prehistoric browsers will ignore them too. The application will still work without these, just slightly less smoothly.*/
+.shape.svgtext{
+    -webkit-user-select: none;  /*may result in a vendor prefix warning*/
+    -moz-user-select: none;     /*may result in a vendor prefix warning*/
+    -ms-user-select: none;      /*may result in a vendor prefix warning*/
+}
+/*Background of modal windows, prevents other elements outside the modal from being clicked*/
+#modalcontainer{
+    display: none;          /*hidden at start*/
+    position: fixed;
+    top: 0;                 /*full screen*/
+	right: 0;
+	bottom: 0;
+	left: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+}
+/*Download and upload modal windows*/
+.promptmodal{
+    display: none;          /*hidden at start*/
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    height: 120px;
+    margin-top: -60px;      /*half-height*/
+    width: 300px;
+    margin-left: -150px;    /*half-width*/
+    z-index: 10;
+    background-color: #111111;
+    border-style: solid;
+    border-color: #00F7FF;
+    border-width: 2px;
+    border-radius: 15px;
+    color: #f5f5f5;
+}
+/*Title of modal windows*/
+.prompttitle{
+    text-align: center;
+    font-family: "Trebuchet MS", "Lucida Sans", Tahoma, sans-serif;
+    font-size: 20px;
+    color: #00F7FF;
+}
+/*Options of default download*/
+.loadoptions{
+    margin-left: 5px;
+    font-family: Calibri, sans-serif;
+    font-size: 16px;
+}
+/*Descriction of modal windows*/
+.promptdescription{
+    margin-left: 5px;
+    font-family: Calibri, sans-serif;
+    font-size: 16px;
+}
+/*Loading button*/
+.loadbutton{
+    margin-top: 7px;
+    margin-left: 125px;
+    border-radius: 4px;
+    font-family: "Franklin Gothic Medium","Franklin Gothic",Arial,sans-serif;
+	font-size: 15px;
+    height: 20px;
+    width: 45px;
+    text-align: center;
+    color: #111111;
+    cursor: pointer;
+}
+/*Close window button in the top right*/
+.close{
+    color: #F5F5F5;
+    float: right;
+    margin-top: -5px;
+    margin-right: 5px;
+    font-size: 28px;
+    font-weight: 700;
+}
+/*Dynamic effect on mouse over the close button*/
+.close:hover{
+    color: #00F7FF;
+    cursor: pointer;
+}
+/*Input field where the user writes the name of his circuit*/
+#uploadid{
+    margin-left: 5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 260px;
+}
+/*Round "semaphore" which tells the user if the name already existed*/
+#duplicatesignal{
+    display: inline;
+    float: right;
+    width: 15px;
+    height: 15px;
+    margin-right: 8px;
+    margin-top: 11px;
+    border-radius: 7.5px;
+    background-color: red;
+}
+/*Modal info window, which displays help information.*/
+#helpbox{
+    display: none;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    height: 350px;
+    margin-top: -175px; /*metà dell'altezza*/
+    width: 600px;
+    margin-left: -300px; /*metà della larghezza*/
+    z-index: 10;
+    background-color: #111111;
+    border-style: solid;
+    border-color: #00F7FF;
+    border-width: 2px;
+    border-radius: 15px;
+    color: #f5f5f5;
+}
+/*Sidebar of the help window*/
+#helpsidebar{
+    position: absolute;
+    left: 20px;
+    bottom: 20px;
+    height: 280px;
+    width: 150px;
+    border-style: solid;
+    border-color: #00F7FF;
+    border-width: 2px;
+    border-radius: 10px;
+    background-color: #111111;
+}
+/*List inside the help sidebar*/
+#helpsidebar li{
+    display: block;
+    margin: 10px;
+    font-size: 19px;
+    color: #f5f5f5;
+    background-color: #111111;
+    cursor: pointer;
+}
+/*Dynamic effect when mouse is over an element in the list*/
+#helpsidebar li:hover{
+    color: #00f7ff;
+}
+/*Container for the help paragraphs*/
+#helptextbox{
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+    height: 280px;
+    width: 375px;
+    border-style: solid;
+    border-color: #00F7FF;
+    border-width: 2px;
+    border-radius: 10px;
+    padding: 10px;
+    background-color: #f5f5f5;
+    color: black;
+    overflow-y: auto;
+}
